@@ -1,0 +1,5 @@
+### https://raw.github.com/github/gitignore/c0de8bc140e3079c93f2970be853d310602a5ddb/Global/Vagrant.gitignore
+
+.vagrant/
+
+
