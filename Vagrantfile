@@ -71,4 +71,5 @@ Vagrant.configure("2") do |config|
   #   apt-get install -y apache2
   # SHELL
   config.vm.provision "file", source: "~/.netrc", destination: ".netrc"
+  config.vm.provision "shell", path: "set_passwd.sh"
 end
