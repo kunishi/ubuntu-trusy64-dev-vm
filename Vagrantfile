@@ -77,7 +77,8 @@ Vagrant.configure("2") do |config|
   config.vm.provision "file", source: "~/Documents/ubuntu/public.key", destination: "public.key"
   config.vm.provision "shell", path: "set_passwd.sh"
   config.vm.provision "shell", inline: <<-SHELL
-    apt-get update
-    apt-get install -y build-essential git vim gnupg2
+    apt-get update && apt-get upgrade -y && apt-get autoremove -y
+    apt-get install -y build-essential git vim gnupg2 curl
+    curl -L https://raw.github.com/simonwhitaker/gibo/master/gibo -so /usr/local/bin/gibo && chmod +x /usr/local/bin/gibo
   SHELL
 end

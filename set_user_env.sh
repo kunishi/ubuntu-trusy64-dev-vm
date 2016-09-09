@@ -9,5 +9,7 @@ git clone git@github.com:kunishi/dotfiles.git \
 mkdir -p $HOME/.vim/bundle \
   && git clone git://github.com/Shougo/neobundle.vim $HOME/.vim/bundle/neobundle.vim
 
+gibo -u
+
 gpg --import $HOME/public.key
 gpg --import $HOME/private.key
