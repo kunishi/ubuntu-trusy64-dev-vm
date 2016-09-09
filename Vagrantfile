@@ -38,6 +38,7 @@ Vagrant.configure("2") do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
+  config.vm.synced_folder "#{ENV['HOME']}/Documents/ubuntu", "/vagrant_data"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -80,7 +81,8 @@ Vagrant.configure("2") do |config|
     apt-get update && apt-get upgrade -y && apt-get autoremove -y
     apt-get install -y build-essential git vim gnupg2 curl
     apt-get install -y devscripts debhelper dh-make diffutils patch fakeroot pbuilder dput
-    apt-get install -y perl-doc check astyle perltidy
+    apt-get install -y perl-doc check astyle perltidy apt-file
+    apt-file update
     curl -L https://raw.github.com/simonwhitaker/gibo/master/gibo -so /usr/local/bin/gibo && chmod +x /usr/local/bin/gibo
   SHELL
 end
