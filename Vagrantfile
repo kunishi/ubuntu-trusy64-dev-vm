@@ -73,5 +73,11 @@ Vagrant.configure("2") do |config|
   config.vm.provision "file", source: "~/.netrc", destination: ".netrc"
   config.vm.provision "file", source: "~/Documents/ubuntu/id_rsa", destination: ".ssh/id_rsa"
   config.vm.provision "file", source: "~/Documents/ubuntu/id_rsa.pub", destination: ".ssh/id_rsa.pub"
+  config.vm.provision "file", source: "~/Documents/ubuntu/private.key", destination: "private.key"
+  config.vm.provision "file", source: "~/Documents/ubuntu/public.key", destination: "public.key"
   config.vm.provision "shell", path: "set_passwd.sh"
+  config.vm.provision "shell", inline: <<-SHELL
+    apt-get update
+    apt-get install -y build-essential git vim gnupg2
+  SHELL
 end
