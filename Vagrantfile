@@ -84,5 +84,7 @@ Vagrant.configure("2") do |config|
     apt-get install -y perl-doc check astyle perltidy apt-file
     apt-file update
     curl -L https://raw.github.com/simonwhitaker/gibo/master/gibo -so /usr/local/bin/gibo && chmod +x /usr/local/bin/gibo
+    sudo -u "vagrant" -H dbus-launch gsettings set org.gnome.desktop.screensaver lock-enabled false
+    sudo -u "vagrant" -H dbus-launch gsettings set org.gnome.desktop.screensaver ubuntu-lock-on-suspend false
   SHELL
 end
