@@ -79,7 +79,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "set_passwd.sh"
   config.vm.provision "shell", inline: <<-SHELL
     apt-get update && apt-get upgrade -y && apt-get autoremove -y
-    apt-get install -y build-essential git vim gnupg2 curl nkf
+    apt-get install -y build-essential git vim gnupg2 curl nkf lv
     apt-get install -y devscripts debhelper dh-make diffutils patch fakeroot pbuilder dput
     apt-get install -y perl-doc check astyle perltidy apt-file
     apt-file update
