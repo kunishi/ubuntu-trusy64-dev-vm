@@ -49,7 +49,7 @@ Vagrant.configure("2") do |config|
     vb.gui = true
   #
   #   # Customize the amount of memory on the VM:
-    vb.memory = "1024"
+    vb.memory = "2048"
     vb.customize ["modifyvm", :id, "--memory", "2048"]
     vb.customize ["modifyvm", :id, "--vram", "128"]
   end
@@ -78,10 +78,13 @@ Vagrant.configure("2") do |config|
   config.vm.provision "file", source: "~/Documents/ubuntu/public.key", destination: "public.key"
   config.vm.provision "shell", path: "set_passwd.sh"
   config.vm.provision "shell", inline: <<-SHELL
-    apt-get update && apt-get upgrade -y && apt-get autoremove -y
+    export DEBIAN_FRONTEND='noninteractive'
+    echo "set grub-pc/install_devices /dev/sda" | debconf-communicate
+    apt-get update && apt-get upgrade -y -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' && apt-get autoremove -y
     apt-get install -y build-essential git vim gnupg2 curl nkf lv
     apt-get install -y devscripts debhelper dh-make diffutils patch fakeroot pbuilder dput
     apt-get install -y perl-doc check astyle perltidy apt-file cpputest
+    apt-get upgrade -y -o Dpkg::Options::='--force-confnew' -o Dpkg::Options::='--force-confold' && apt-get autoremove -y
     apt-file update
     curl -L https://raw.github.com/simonwhitaker/gibo/master/gibo -so /usr/local/bin/gibo && chmod +x /usr/local/bin/gibo
     [ -d bats ] && rm -rf bats && git clone https://github.com/sstephenson/bats.git && (cd bats && ./install.sh /usr/local)
